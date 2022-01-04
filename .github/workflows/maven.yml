@@ -16,22 +16,6 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-#     - name: Use Node.js 
-#       uses: actions/setup-node@v2
-#       with:
-#         cache: 'npm'
-#     - run: npm install
-    
-#     # Runs a Black Duck rapid scan on pull requests
-#     - name: Run RAPID Black Duck security scan
-#  #     if: ${{github.event_name == 'pull_request'}}
-#       uses: matthewb66/blackduck-scan-action@v2
-#       continue-on-error: true
-#       with:
-#         url: ${{ secrets.BLACKDUCK_URL }}
-#         token: ${{ secrets.BLACKDUCK_API_TOKEN }}
-#         mode: rapid
-#         output: blackduck-output
           
     # Runs special workflow steps for pull requests
     - name: Run RAPID Black Duck security scan
@@ -50,13 +34,14 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ github.token }}
 
-    # Runs special workflow steps for pull requests
+    # Runs special workflow steps for push
     - name: Run RAPID Black Duck security scan
       if: ${{github.event_name == 'push'}}
       uses: matthewb66/blackduck-scan-action@v24
       with:
         url: ${{ secrets.BLACKDUCK_URL }}
         token: ${{ secrets.BLACKDUCK_API_TOKEN }}
+        debug: 9
         fix_pr: true
         comment_on_pr: false
         upgrade_major: true
