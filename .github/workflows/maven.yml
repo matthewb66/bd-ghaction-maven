@@ -18,9 +18,9 @@ jobs:
     - uses: actions/checkout@v2
           
     # Runs special workflow steps for pull requests
-    - name: Run RAPID Black Duck security scan
+    - name: Black Duck security scan for Pull Request
       if: ${{github.event_name == 'pull_request'}}
-      uses: matthewb66/blackduck-scan-action@v24
+      uses: matthewb66/blackduck-scan-action@v43
       with:
         url: ${{ secrets.BLACKDUCK_URL }}
         token: ${{ secrets.BLACKDUCK_API_TOKEN }}
@@ -30,31 +30,30 @@ jobs:
         upgrade_indirect: true
 #         detect_opts: detect.detector.buildless=true,detect.maven.buildless.legacy.mode=false
         output: blackduck-output
-#         sarif: blackduck-sarif.json
+        sarif: blackduck-sarif.json
       env:
         GITHUB_TOKEN: ${{ github.token }}
 
     # Runs special workflow steps for push
-    - name: Run RAPID Black Duck security scan
+    - name: Black Duck security scan for Push
       if: ${{github.event_name == 'push'}}
-      uses: matthewb66/blackduck-scan-action@v24
+      uses: matthewb66/blackduck-scan-action@v43
       with:
         url: ${{ secrets.BLACKDUCK_URL }}
         token: ${{ secrets.BLACKDUCK_API_TOKEN }}
-        debug: 9
         fix_pr: true
         comment_on_pr: false
         upgrade_major: true
         upgrade_indirect: true
 #         detect_opts: detect.detector.buildless=true,detect.maven.buildless.legacy.mode=false
         output: blackduck-output
-#         sarif: blackduck-sarif.json  
+        sarif: blackduck-sarif.json  
       env:
         GITHUB_TOKEN: ${{ github.token }}
 
-#     - name: Upload SARIF file
-#  #     if: ${{github.event_name == 'pull_request'}}
-#       uses: github/codeql-action/upload-sarif@v1
-#       with:
-#         # Path to SARIF file relative to the root of the repository
-#         sarif_file: blackduck-sarif.json
+    - name: Upload SARIF file
+ #     if: ${{github.event_name == 'pull_request'}}
+      uses: github/codeql-action/upload-sarif@v1
+      with:
+        # Path to SARIF file relative to the root of the repository
+        sarif_file: blackduck-sarif.json
