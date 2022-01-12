@@ -14,7 +14,7 @@
   <scm>
     <connection>scm:git:git://github.com/blackducksoftware/hub-common.git/</connection>
     <developerConnection>scm:git:git@github.com:BlackDuckCoPilot/example-maven-travis.git</developerConnection>
-    <url>https://github.com/BlackDuckCoPilot/example-maven-travis</url>
+    <url>https://github.com/BlackDuckCoPilot/example-maven-travid</url>
   </scm>
 
   <properties>
