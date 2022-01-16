@@ -30,6 +30,7 @@ jobs:
         upgrade_indirect: true
 #         detect_opts: detect.detector.buildless=true,detect.maven.buildless.legacy.mode=false
         output: blackduck-output
+        debug: 9
         sarif: blackduck-sarif.json
       env:
         GITHUB_TOKEN: ${{ github.token }}
@@ -47,11 +48,18 @@ jobs:
         upgrade_indirect: true
 #         detect_opts: detect.detector.buildless=true,detect.maven.buildless.legacy.mode=false
         output: blackduck-output
+        debug: 9
         sarif: blackduck-sarif.json  
       env:
         GITHUB_TOKEN: ${{ github.token }}
 
+    - name: "Check file existence"
+      id: check_files
+      uses: andstor/file-existence-action@v1
+      with:
+        files: "blackduck-sarif.json"
     - name: Upload SARIF file
+      if: steps.check_files.outputs.files_exists == 'true'
  #     if: ${{github.event_name == 'pull_request'}}
       uses: github/codeql-action/upload-sarif@v1
       with:
