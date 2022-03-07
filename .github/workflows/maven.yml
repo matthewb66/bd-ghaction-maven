@@ -19,7 +19,7 @@ jobs:
           
     # Runs special workflow steps for pull requests
     - name: Run Synopsys Detect
-      uses: synopsys-sig/detect-action@v0.3.1
+      uses: synopsys-sig/detect-action@v0.3.2
       with:
           scan-mode: RAPID # Can be omitted, since this is the default value
           github-token: ${{ secrets.GITHUB_TOKEN }}
