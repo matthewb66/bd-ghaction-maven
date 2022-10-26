@@ -27,5 +27,5 @@ jobs:
           blackduck_scan_full: false
 
           # Optional parameter. The values could be. ALL|NONE|BLOCKER|CRITICAL|MAJOR|MINOR|OK|TRIVIAL|UNSPECIFIED
-          blackduck_scan_failure_severities: ALL
+          #blackduck_scan_failure_severities: CRITICAL
           bridge_download_url: https://sig-repo.synopsys.com/artifactory/bds-integrations-release/com/synopsys/integration/synopsys-action/0.1.72/ci-package-0.1.72-linux64.zip
